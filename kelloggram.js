@@ -1,4 +1,4 @@
-firebase.auth().onAuthStateChanged(async function(user) {
+firebase.auth().onAuthStateChanged(async function (user) {
   if (user) {
     // Signed in
     console.log('signed in')
@@ -7,14 +7,14 @@ firebase.auth().onAuthStateChanged(async function(user) {
     document.querySelector('.sign-in-or-sign-out').innerHTML = `
       <button class="text-pink-500 underline sign-out">Sign Out</button>
     `
-    document.querySelector('.sign-out').addEventListener('click', function(event) {
+    document.querySelector('.sign-out').addEventListener('click', function (event) {
       console.log('sign out clicked')
       firebase.auth().signOut()
       document.location.href = 'index.html'
     })
 
     // Listen for the form submit and create/render the new post
-    document.querySelector('form').addEventListener('submit', async function(event) {
+    document.querySelector('form').addEventListener('submit', async function (event) {
       event.preventDefault()
       let postUsername = user.displayName
       let postImageUrl = document.querySelector('#image-url').value
@@ -33,7 +33,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
     let response = await fetch('/.netlify/functions/get_posts')
     let posts = await response.json()
-    for (let i=0; i<posts.length; i++) {
+    for (let i = 0; i < posts.length; i++) {
       let post = posts[i]
       renderPost(post)
     }
@@ -101,7 +101,7 @@ async function renderPost(post) {
 
   // listen for the like button on this post
   let likeButton = document.querySelector(`.post-${postId} .like-button`)
-  likeButton.addEventListener('click', async function(event) {
+  likeButton.addEventListener('click', async function (event) {
     event.preventDefault()
     console.log(`post ${postId} like button clicked!`)
     let currentUserId = firebase.auth().currentUser.uid
@@ -122,7 +122,7 @@ async function renderPost(post) {
 
   // listen for the post comment button on this post
   let postCommentButton = document.querySelector(`.post-${postId} .post-comment-button`)
-  postCommentButton.addEventListener('click', async function(event) {
+  postCommentButton.addEventListener('click', async function (event) {
     event.preventDefault()
     console.log(`post ${postId} post comment button clicked!`)
 
